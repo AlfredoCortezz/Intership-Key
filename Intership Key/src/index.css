@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-color: #F5F5F5;
+    --surface-color: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #7E7D8A;
+    --border-color: #E5E5E8;
+    --shadow-color: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  html.dark {
+    --bg-color: #121212;
+    --surface-color: #1E1E1E;
+    --text-primary: #FFFFFF;
+    --text-secondary: #CBCBC4;
+    --border-color: #333333;
+    --shadow-color: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Albert Sans', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer utilities {
+  .bg-surface {
+    background-color: var(--surface-color);
+  }
+  .text-main {
+    color: var(--text-primary);
+  }
+  .text-muted {
+    color: var(--text-secondary);
+  }
+  .border-main {
+    border-color: var(--border-color);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-color);
+  }
+}
