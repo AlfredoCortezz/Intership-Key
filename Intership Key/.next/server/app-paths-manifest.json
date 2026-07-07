@@ -1,0 +1,7 @@
+{
+  "/page": "app/page.js",
+  "/power-skills/page": "app/power-skills/page.js",
+  "/academico/page": "app/academico/page.js",
+  "/extra/page": "app/extra/page.js",
+  "/well/page": "app/well/page.js"
+}

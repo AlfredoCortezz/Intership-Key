@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import { Globe, Book, Download, Bell, LogOut, Moon, Sun, Menu } from 'lucide-react';
 

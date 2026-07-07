@@ -1,5 +1,6 @@
+'use client';
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { PdfContext } from '@/context/PdfContext';
 import { Sidebar } from './Sidebar';
 import { TopNav } from './TopNav';
 import html2canvas from 'html2canvas';
@@ -10,7 +11,7 @@ import {
   GraduationCap, Zap, CheckSquare 
 } from 'lucide-react';
 
-export const Layout = () => {
+export const Layout = ({ children }: { children: React.ReactNode }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleDownloadPdf = async () => {
@@ -55,7 +56,7 @@ export const Layout = () => {
         
         {/* Main Content Area */}
         <main className="flex-1 overflow-y-auto" id="export-content">
-          <Outlet context={{ handleDownloadPdf }} />
+          <PdfContext.Provider value={{ handleDownloadPdf }}>{children}</PdfContext.Provider>
         </main>
       </div>
       
