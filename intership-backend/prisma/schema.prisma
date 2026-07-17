@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------------------
+// Módulo de Actividades Académicas (El CRUD de Academico.tsx)
+// -----------------------------------------------------------------
+model AcademicActivity {
+  id               String   @id @default(uuid())
+  badge            String   // Ej: "PBL", "Reto", "Cursos y certs"
+  badgeType        String   // Ej: "PBL", "Retos", "Cursos", "Experiencias"
+  section          String   // Ej: "PBL", "Retos", "Cursos Libres y certs"
+  title            String
+  subtitle         String
+  info             String
+  materia          String
+  nota             String?  // Opcional
+  hasActions       Boolean  @default(false)
+  checkmark        Boolean  @default(false)
+  trophy           Boolean  @default(false)
+  customTrophyText String?  // Opcional
+  hasCert          Boolean  @default(false)
+  takeaways        String?  // JSON string
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Student {
+  id             String   @id @default(uuid())
+  name           String
+  role           String
+  program        String
+  cohort         String
+  avatar         String
+  honors         Int      @default(0)
+  warnings       Int      @default(0)
+
+  hours          StudentHour[]
+  badges         Badge[]
+  recommendations Recommendation[]
+  powerSkills    PowerSkill[]
+}
+
+model StudentHour {
+  id        Int     @id @default(autoincrement())
+  day       String
+  hours     Int
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+}
+
+model Badge {
+  id        Int     @id @default(autoincrement())
+  title     String
+  icon      String
+  date      String
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+}
+
+model Recommendation {
+  id        Int     @id @default(autoincrement())
+  text      String
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+}
+
+model PowerSkill {
+  id        Int     @id @default(autoincrement())
+  subject   String
+  score     Int
+  fullMark  Int     @default(100)
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+}

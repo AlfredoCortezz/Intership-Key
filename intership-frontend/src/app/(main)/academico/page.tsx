@@ -1,6 +1,7 @@
+"use client";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { cn } from '../utils/cn';
+import { cn } from '@/utils/cn';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { CheckCircle2, Trophy, FileText, Send, Trash2, Image as ImageIcon, Plus, X } from 'lucide-react';
 
@@ -258,7 +259,7 @@ const Card = ({ item, onDelete }: { item: any, onDelete: (id: string) => void })
   );
 };
 
-export const Academico = () => {
+export default function AcademicoPage() {
   const [activeTab, setActiveTab] = useState('Todo');
   const [highlightedTab, setHighlightedTab] = useState('Todo');
   const [cards, setCards] = useState<any[]>([]);
@@ -266,7 +267,7 @@ export const Academico = () => {
   const [newActivity, setNewActivity] = useState({ title: '', section: 'PBL', materia: '' });
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/academic-activities')
+    axios.get('/api/academic-activities')
       .then(res => setCards(res.data))
       .catch(err => console.error('Error fetching activities:', err));
   }, []);
@@ -311,7 +312,7 @@ export const Academico = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`http://localhost:3000/api/academic-activities/${id}`);
+      await axios.delete(`/api/academic-activities/${id}`);
       setCards(cards.filter(c => c.id !== id));
     } catch (error) {
       console.error('Error deleting activity', error);
@@ -349,7 +350,7 @@ export const Academico = () => {
     };
     
     try {
-      const res = await axios.post('http://localhost:3000/api/academic-activities', newItem);
+      const res = await axios.post('/api/academic-activities', newItem);
       setCards([res.data, ...cards]);
       setIsModalOpen(false);
       setNewActivity({ title: '', section: 'PBL', materia: '' });
@@ -516,3 +517,5 @@ export const Academico = () => {
     </div>
   );
 };
+
+
